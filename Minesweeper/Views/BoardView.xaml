@@ -1,0 +1,32 @@
+﻿<Window x:Class="Minesweeper.BoardView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Minesweeper"
+        mc:Ignorable="d"
+        Title="BoardView" Height="600" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Minesweeper" HorizontalAlignment="Center" FontSize="24" FontWeight="Bold" Margin="10" />
+
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding Grid}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="9" Columns="9" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Command="{Binding DataContext.MakeVisibleCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" CommandParameter="{Binding }" Background="{Binding Color}" Margin="1" FontSize="22px">
+                        <TextBlock Text="{Binding Content}" Visibility="{Binding IsVisible, Mode=TwoWay}"/>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+
+</Window>
